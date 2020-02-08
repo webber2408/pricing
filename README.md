@@ -1,11 +1,11 @@
-# Hackernity
+# Lead Pricing Page
 
 ## Setup & Run
 
 ``` 
 sh setup.sh
 ```
---> Open http://localhost:9028/
+--> Open http://localhost:9000/
 
 ## Subsequent Run 
 ### webpack-dev-server 

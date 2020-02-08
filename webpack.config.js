@@ -32,7 +32,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     publicPath: 'http://localhost:9000/',
     historyApiFallback:true,
-    port: 9028
+    port: 9000
   },
   plugins: [
     new CleanWebpackPlugin(),
