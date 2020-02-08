@@ -1,5 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat.js';
+import '@polymer/paper-dialog';
+import './lead-form/lead-form.js';
 
 class LeadPricing extends LitElement {
 
@@ -137,6 +139,9 @@ class LeadPricing extends LitElement {
 
     //Add initial selected attribute
     this.navClicked(3);
+    this.openLeadForm();
+
+    window.addEventListener('close-modal', (e)=>{ this.closeLeadForm() });
   }
 
   render(){
@@ -264,6 +269,12 @@ class LeadPricing extends LitElement {
           .border-box{
             box-sizing: border-box !important;
           }
+          #lead-form-dialog{
+            width:50%;
+            margin:0px 25%;
+            top:2%;
+            overflow-y:auto;
+          }
         </style>
         <style>
           @media screen and (max-width: 992px) {
@@ -274,6 +285,10 @@ class LeadPricing extends LitElement {
           @media screen and (max-width: 768px) {
             .package {
               width: calc(50% - 12px);
+            }
+            #lead-form-dialog{
+              width:80%;
+              margin:0px 10%;
             }
           }
           @media only screen and (max-width:470px){
@@ -286,6 +301,10 @@ class LeadPricing extends LitElement {
             .package {
               width: 100%;
               margin: 0 20px 40px;
+            }
+            #lead-form-dialog{
+              width:94%;
+              margin:0px 3%;
             }
           }
         </style>
@@ -335,7 +354,7 @@ class LeadPricing extends LitElement {
                       <div class="focused-detail">
                         $${numeral(item.pricePerTransfer*item.platformPrice).format('0,0')}/mo
                       </div>
-                      <button class="primary-btn">Start Your Trial</button>
+                      <button class="primary-btn" @click = "${() => this.openLeadForm()}">Start Your Trial</button>
                     </div>
                   `;
                 }
@@ -352,7 +371,18 @@ class LeadPricing extends LitElement {
             </div>
           </div>
         </div>
+        <paper-dialog id="lead-form-dialog" modal>
+            <lead-form></lead-form>
+        </paper-dialog>
     `;
+  }
+
+  openLeadForm(){
+    this.shadowRoot.querySelector("#lead-form-dialog").open();
+  }
+
+  closeLeadForm(){
+    this.shadowRoot.querySelector("#lead-form-dialog").close();
   }
 
   navClicked(index){
